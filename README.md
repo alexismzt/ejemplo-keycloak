@@ -259,7 +259,7 @@ Agregar en la sección de **dependencies** en el archivo **pom.xml**
 </dependency>
 ```
 
-A manera de ejemplo se agregar 3 recursos con niveles diferentes de seguridad, la página index.html con un nivel público, la página home.html con un nivel de seguridad de user (rol) y la de admin con el nivel de admin.
+A manera de ejemplo se agregan 3 recursos (páginas) con niveles diferentes de seguridad, la página index.html con un nivel público, la página home.html con un nivel de seguridad de user (rol) y la de admin con el nivel de admin.
 
 Agregar en **/src/main/resources/static** los siguientes archivos:
 
