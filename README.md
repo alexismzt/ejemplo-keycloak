@@ -1,4 +1,4 @@
-# Keycloak
+# Ejemplo Keycloak
 
 Creado por Álvaro Araya O.<br/>coder [at]  aao.cr
 <br/>2020-05-02
@@ -11,7 +11,18 @@ Este ejemplo realiza la implementación de una aplicación web basada en Spring 
 
 **Nota**: En este ejemplo no se implementa la conexión a la BD, sin embargo, el contenedor de PostgreSQL está listo para que puena establecerse conexiones por ejemplo con JPA.
 
-## PREPARACIÓN DEL AMBIENTE
+## ¿Qué es Keycloak?
+
+Keycloak es un servidor de autenticación el cual permite agregar una capa de seguridad para proteger aplicaciones o servicios web.
+
+El servidor permite agregar funciones avanzadas como federación de usuarios, login por medio de redes sociales o negociación de identidad.
+
+Con Keycloak se evita escribir la lógica de autenticación y autorización, delegando esos servicios al servidor, pudiendo concentrarse en la lógica de negocio que realmente interesa.
+
+Para más información puede ingresar a la página de [Keycloak](https://www.keycloak.org)
+
+
+## Preparación del Ambiente
 
 #### Requisitos:
 
@@ -22,7 +33,9 @@ Este ejemplo realiza la implementación de una aplicación web basada en Spring 
 
 ** Preferible desarrollar el laboratorio en un ambiente Linux o macOS
 
-## ARCHIVO DOCKER COMPOSE
+## Archivo docker-compose.yml
+
+El archivo docker-compose.yml es un estilo de receta que permite armar la configuración de los contenedores y cómo estos van a interactuar entre sí.
 
 Crear el archivo de configuración de **docker-compose.yml** en un folder llamado **kcexample-containers**.
 
@@ -109,8 +122,9 @@ Para iniciar los contenedores debe ejecutar el comando desde terminal en el dire
 $ docker-compose up
 ```
 
-### ACCEDER AL PGADMIN
+### Acceder al pgAdmin
 
+Este servidor se configura para poder visualizar las tablas que son almacenadas en el servidor de PostgreSQL.
 
 Ingresar con los siguientes credenciales:
 
@@ -130,7 +144,9 @@ Password:		pwd_Werar7Oic4
 Save:			Yes
 ```
 
-### ACCEDER AL SERVIDOR DE KEYCLOAK
+### Acceder al Servidor de Keycloak
+
+El servidor de Keycloak cuenta con una interfaz web que permite administrar la configuración. También cuenta con una API que permite gestionar el servidor de manera remota.
 
 URL: **http://localhost:9090/auth/admin/master/console/#/realms/master**
 
@@ -193,7 +209,9 @@ user
 
 **Nota**: Luego se debe agregar el rol de admin para poder dar acceso al usuario al recurso de admin en la aplicación.
 
-## APLICACION EN SPRING-BOOT
+## Aplicación de Spring Boot
+
+El framework de Java Spring Boot y su componente de seguridad, se comunican de manera transparente con el servidor de Keycloak, únicamente se debe realizar la configuración y con objetos especializados se realiza la gestión de seguridad.
 
 Iniciar con **https://start.spring.io** y descargar el proyecto:
 
@@ -240,6 +258,8 @@ Agregar en la sección de **dependencies** en el archivo **pom.xml**
     <version>10.0.0</version>
 </dependency>
 ```
+
+A manera de ejemplo se agregar 3 recursos con niveles diferentes de seguridad, la página index.html con un nivel público, la página home.html con un nivel de seguridad de user (rol) y la de admin con el nivel de admin.
 
 Agregar en **/src/main/resources/static** los siguientes archivos:
 
@@ -420,6 +440,6 @@ keycloak.public-client=true
 	Usuario:			usuario@kcexample.com
 	Clave:				temporal123  **debe cambiar la clave**
 	```
-2.	Trata de ingresar a la sección de Administración.
+2.	Trate de ingresar a la sección de Administración.
 3. Agregar el Rol de admin para el usuario: **usuario@kcexample.com**.
 
